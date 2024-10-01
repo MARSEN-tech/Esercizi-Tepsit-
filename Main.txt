@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Richiesta dei valori T e N all'utente
+        System.out.print("Inserisci il numero di Thread da creare (T): ");
+        int T = scanner.nextInt();
+        System.out.print("Inserisci il valore massimo (N): ");
+        int N = scanner.nextInt();
+        
+        // Creazione e avvio dei Thread
+        CounterThread[] threads = new CounterThread[T];
+        for (int i = 0; i < T; i++) {
+            int x = (int) (Math.random() * (N + 1)); // Genera un numero casuale tra 0 e N
+            threads[i] = new CounterThread(x);
+            threads[i].start();
+        }
+        
+        // Monitoraggio dei Thread
+        ThreadMonitor monitor = new ThreadMonitor(threads);
+        monitor.start();
+        
+        scanner.close();
+    }
+}

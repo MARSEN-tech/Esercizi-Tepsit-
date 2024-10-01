@@ -1,0 +1,28 @@
+public class CounterThread extends Thread {
+    private int maxCount;
+    private int currentCount = 0;
+
+    public CounterThread(int maxCount) {
+        this.maxCount = maxCount;
+    }
+
+    @Override
+    public void run() {
+        while (currentCount < maxCount) {
+            currentCount++;
+            try {
+                Thread.sleep(120); // Aspetta 120ms
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+
+    public int getCurrentCount() {
+        return currentCount;
+    }
+
+    public boolean isCompleted() {
+        return currentCount >= maxCount;
+    }
+}
